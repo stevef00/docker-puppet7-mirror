@@ -1,10 +1,10 @@
 To build the docker image:
 
-  docker build -t foo:bar
+  docker build -t stevef00:puppet7-mirror
 
 NOTE: This image needs a volume to write the yum repo data.
 
 To run a container with the image:
 
-  docker run -it --rm --mount source=yum-mirror,destination=/usr/share/nginx/html steve:puppet7-mirror
+  docker run -it --rm --mount source=yum-mirror,destination=/usr/share/nginx/html stevef00:puppet7-mirror
 
