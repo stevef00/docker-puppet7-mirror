@@ -1,7 +1,8 @@
 FROM almalinux:9
 
+ENV EL_VERSION=${EL_VERSION:-8}
+
 COPY ["RPM-GPG-KEY-puppet*", "/etc/pki/rpm-gpg/"]
-COPY ["puppet7.repo", "/etc/yum.repos.d/"]
 COPY ["update-repo.sh", "/usr/bin/"]
 
 RUN rpmkeys --import /etc/pki/rpm-gpg/RPM-GPG-KEY-puppet* \

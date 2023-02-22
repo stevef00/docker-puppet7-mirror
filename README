@@ -4,7 +4,13 @@ To build the docker image:
 
 NOTE: This image needs a volume to write the yum repo data.
 
-To run a container with the image:
+To run a container with the image using default RHEL version (currently el8):
 
   docker run -it --rm --mount source=yum-mirror,destination=/usr/share/nginx/html stevef00:puppet7-mirror
+
+An alternate RHEL version can be set at container runtime via the EL_VERSION environment varibale.
+For example, to mirror for el9:
+
+  docker run -it --rm -e EL_VERSION=9 --mount source=yum-mirror,destination=/usr/share/nginx/html \
+    stevef00:puppet7-mirror
 
