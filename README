@@ -1,6 +1,6 @@
 To build the docker image:
 
-  docker build -t stevef00:puppet7-mirror
+  docker build -t stevef00:puppet7-mirror .
 
 NOTE: This image needs a volume to write the yum repo data.
 
