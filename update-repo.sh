@@ -2,7 +2,8 @@
 
 EL_VERSION=${EL_VERSION:-8}
 
-DESTDIR=/usr/share/nginx/html/puppetlabs/puppet7/el/${EL_VERSION}/x86_64
+DATAROOT=/usr/share/nginx/html
+DESTDIR=${DATAROOT}/puppetlabs/puppet7/el/${EL_VERSION}/x86_64
 
 # FIXME: should test that this is in a volume, otherwise we'll be writing to the writeable layer
 test -d "$DESTDIR" || mkdir -pv $DESTDIR
@@ -17,6 +18,12 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppet-20250406
 enabled=1
 gpgcheck=1
 EOF
+
+# copy the gpgkeys to the volume if they don't exist
+test -f "${DATAROOT}/puppetlabs/RPM-GPG-KEY-puppet-20250406" \
+  || cp /etc/pki/rpm-gpg/RPM-GPG-KEY-puppet-20250406 "${DATAROOT}/puppetlabs"
+test -f "${DATAROOT}/puppetlabs/RPM-GPG-KEY-puppet" \
+  || cp /etc/pki/rpm-gpg/RPM-GPG-KEY-puppet "${DATAROOT}/puppetlabs"
 
 /usr/bin/reposync --repo puppet7 -p "$DESTDIR" --norepopath --newest-only --gpgcheck --quiet
 
